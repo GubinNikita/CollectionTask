@@ -1,8 +1,8 @@
 package task.controller;
 
-import task.model.comparator.PersonAgeComparator;
-import task.model.comparator.PersonNameComparator;
+import task.model.comparator.PersonComparator;
 import task.model.entity.Person;
+import task.model.entity.PersonFieldsEnum;
 import task.model.list.MyList;
 import task.model.list.impl.MyArrayListImpl;
 import task.model.list.iterator.MyListIterator;
@@ -13,9 +13,6 @@ public class Controller {
 	public static void main(String[] args) {
 		MyList<Person> list1 = new MyArrayListImpl<>();
 		MyList<Person> list2 = new MyArrayListImpl<>();
-
-		PersonAgeComparator ageComparator = new PersonAgeComparator();
-		PersonNameComparator nameComparator = new PersonNameComparator();
 
 		list1.add(new Person("Ivan", 4));
 		list1.add(new Person("Vladimir", 9));
@@ -36,7 +33,7 @@ public class Controller {
 		Printer.print(list.get(4));
 		Printer.print(list.get(0));
 
-		ListSorting.sort(list, nameComparator);
+		ListSorting.sort(list, new PersonComparator(PersonFieldsEnum.NAME));
 
 		Printer.print("Sort by name:");
 		MyListIterator<Person> iterator = list.iterator();
@@ -47,7 +44,7 @@ public class Controller {
 
 		Printer.print("----------------------------------------------------");
 
-		ListSorting.sort(list, ageComparator);
+		ListSorting.sort(list, new PersonComparator(PersonFieldsEnum.AGE));
 
 		Printer.print("Sort by age:");
 		iterator = list.iterator();
